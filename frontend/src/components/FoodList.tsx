@@ -6,6 +6,7 @@ import { useCart } from "@/context/CartContext";
 export interface FoodItem {
   id: number;
   name: string;
+  description: string;
   price: string;
 }
 
@@ -37,26 +38,46 @@ export default function FoodList() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-6">
       {foods.map((food) => (
         <div
           key={food.id}
-          className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow p-6 border border-secondary/20 group"
+          className="relative group bg-white rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-secondary/10"
         >
-          <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xl font-bold text-foreground">{food.name}</h3>
-            <span className="text-lg font-semibold text-primary">
-              ${food.price}
-            </span>
+          {/* Gradient Header */}
+          <div className="h-40 bg-gradient-to-br from-primary via-secondary to-accent relative overflow-hidden">
+            <div className="absolute inset-0 bg-black/10 transition-opacity group-hover:opacity-0" />
+            <div className="absolute top-6 right-6 px-4 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/30">
+              <span className="text-white font-black text-lg">${food.price}</span>
+            </div>
           </div>
-          <button
-            onClick={() =>
-              addToCart({ id: food.id, name: food.name, price: Number(food.price) })
-            }
-            className="w-full py-3 bg-secondary hover:bg-primary text-white rounded-xl font-bold transition-colors shadow-md hover:shadow-lg active:scale-95"
-          >
-            Add to Cart
-          </button>
+
+          {/* Content */}
+          <div className="p-8 pt-6 relative">
+            {/* Decoration */}
+            <div className="absolute -top-10 left-8 w-20 h-20 bg-white rounded-3xl shadow-xl transform rotate-12 flex items-center justify-center p-4">
+              <span className="text-4xl">🍕</span>
+            </div>
+
+            <div className="mt-8">
+              <h3 className="text-2xl font-black text-foreground mb-3 leading-tight group-hover:text-primary transition-colors">
+                {food.name}
+              </h3>
+              <p className="text-foreground/50 text-sm font-medium leading-relaxed mb-8 line-clamp-2">
+                {food.description || "No description provided."}
+              </p>
+            </div>
+
+            <button
+              onClick={() =>
+                addToCart({ id: food.id, name: food.name, price: Number(food.price) })
+              }
+              className="w-full py-4 bg-primary text-white rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 active:scale-95 group-hover:bg-secondary"
+            >
+              <span>Add to Cart</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+            </button>
+          </div>
         </div>
       ))}
     </div>

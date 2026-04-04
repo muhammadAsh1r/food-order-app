@@ -104,6 +104,7 @@ export default function AdminDashboard() {
             <thead className="bg-secondary/10 text-primary font-bold">
               <tr>
                 <th className="px-8 py-6">Name</th>
+                <th className="px-8 py-6">Description</th>
                 <th className="px-8 py-6">Price</th>
                 <th className="px-8 py-6 text-right">Actions</th>
               </tr>
@@ -112,8 +113,9 @@ export default function AdminDashboard() {
               {foods.map((food) => (
                 <tr key={food.id} className="hover:bg-background/50 transition-colors">
                   <td className="px-8 py-6 font-bold text-foreground">{food.name}</td>
+                  <td className="px-8 py-6 text-foreground/50 text-sm truncate max-w-xs">{food.description || "-"}</td>
                   <td className="px-8 py-6 text-primary font-semibold">${food.price}</td>
-                  <td className="px-8 py-6 text-right space-x-4">
+                  <td className="px-8 py-6 text-right space-x-4 whitespace-nowrap">
                     <button
                       onClick={() => {
                         setCurrentFood(food);
@@ -153,6 +155,15 @@ export default function AdminDashboard() {
                   value={currentFood?.name}
                   onChange={(e) => setCurrentFood({ ...currentFood, name: e.target.value })}
                   className="w-full px-5 py-4 rounded-2xl border border-secondary/30 outline-none focus:border-primary text-foreground"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-foreground/70 mb-2">Description</label>
+                <textarea
+                  value={currentFood?.description || ""}
+                  onChange={(e) => setCurrentFood({ ...currentFood, description: e.target.value })}
+                  className="w-full px-5 py-4 rounded-2xl border border-secondary/30 outline-none focus:border-primary text-foreground h-32 resize-none"
+                  placeholder="Enter a brief description..."
                 />
               </div>
               <div>
