@@ -25,6 +25,28 @@ A modern full-stack food ordering application built with **Next.js 15+**, **Tail
 ## Features
 - **Landing Page**: Choose between ordering food or the admin dashboard.
 - **Admin Dashboard**: Full CRUD for food items with custom authentication.
+- **Admin Login**:
+  - **Username**: `demo`
+  - **Password**: `demo`
 - **Modern UI**: Custom purple color scheme, smooth transitions, and responsive design.
 - **Flash Messages**: Toast notifications for successful orders.
 - **Custom Modals**: Premium delete confirmation dialogs.
+
+## Local Development
+
+### 1. Backend
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
+
+### 2. Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
