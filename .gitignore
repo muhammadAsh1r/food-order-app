@@ -1,1 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 env/
+venv/
+*.sqlite3
+
+# Node
+node_modules/
+.next/
+dist/
+.env*.local
+
+# OS
+.DS_Store
